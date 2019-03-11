@@ -1,0 +1,43 @@
+version: '2'
+services:
+    frontend:
+        container_name: frontend
+        build:
+            context: ./frontend/
+            dockerfile: Dockerfile
+        volumes:
+            - ./frontend/:/app
+            - /app/node_modules
+        ports:
+            - 80:80
+        links:
+          - mongo-db
+        environment:
+          MONGO_CONNECTION_STRING: 'mongodb://mongo-db/sample'
+          NODE_ENV: 'development'
+    backend:
+        container_name: backend
+        build:
+            context: ./backend/
+            dockerfile: Dockerfile
+        volumes:
+            - ./backend/:/app
+            - /app/node_modules
+        ports:
+            - 3600:3600
+        links:
+          - mongo-db
+        environment:
+          MONGO_CONNECTION_STRING: 'mongodb://mongo-db/sample'
+          NODE_ENV: 'development'
+    mongo-db:
+        container_name: database
+        build:
+            context: ./database/
+            dockerfile: Dockerfile
+        ports:
+            - 27017:27017
+    mongo-seed:
+      build: ./database-seed
+      links:
+        - mongo-db

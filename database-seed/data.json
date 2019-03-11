@@ -1,0 +1,11 @@
+[
+  {
+    "_id": {
+      "$oid": "5c8675e2c2ced2ed2d166cd9"
+    },
+    "make": "Hyundai",
+    "model": "i30n",
+    "slug": "hyundai-i30n",
+    "description": "Latest hot hatch from Hyundai"
+  }
+]
